@@ -1,0 +1,228 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath, amsfonts, amsthm, amssymb}
+\usepackage[left = 1in, right = 1in]{geometry}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage{verbatim}
+\usepackage{booktabs}
+\usepackage[colorlinks, allcolors=blue]{hyperref}
+
+% Include Solutions
+\newif\ifsln
+\slnfalse
+\slntrue
+
+% No Indent
+\setlength\parindent{0pt}
+
+
+% Common Sets
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\renewcommand{\epsilon}{\varepsilon}
+
+\newcommand{\E}{\mathbb{E}}
+\renewcommand{\P}{\mathbb{P}}
+
+\renewcommand{\iff}{\Leftrightarrow}
+\newcommand{\halmos}{\hfill$\blacksquare$}
+
+\newenvironment{amatrix}[1]{%
+  \left(\begin{array}{@{}*{#1}{c}|c@{}}
+}{%
+  \end{array}\right)
+}
+
+\begin{document}
+\pagestyle{fancyplain}
+
+
+\chead{\textbf{Tutorial 6 \ifsln Solutions \fi}}
+\lhead{\textbf{ECON8000}}
+\rhead{\textbf{Semester 1, 2021}}
+
+\begin{center}
+Solutions due by 10.30am Friday 19\textsuperscript{th} March.
+\end{center}
+
+\begin{enumerate}[1.]
+\setlength\itemsep{5mm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Consider the growth problem with full capital depreciation ($\delta = 1$)
+
+\begin{gather*}
+\underset{\{c_{t}, k_{t+1}\}}{\max} \quad \sum_{t=0}^{\infty} \beta^{t} \log(c_{t})\\
+\text{s.t.} \quad c_{t} + k_{t+1} = Ak_{t}^{\alpha}
+\end{gather*}
+
+\begin{enumerate}[a)]
+\item Write the problem's Bellman equation.
+
+\item Guess and verify that $V(k_{t}) = a + b \log k_{t}$.
+
+\item Find the optimal policies for $k_{t+1}$ and $c_{t}$.
+\end{enumerate}
+
+\ifsln
+\textit{Solution:}
+a) \[V(k_{t}) = \underset{c_{t}}{\max} \ \left\{  \log(c_{t}) + \beta V(Ak_{t}^{\alpha} - c_{t})   \right\}\]
+\bigskip
+
+b) The first order condition tells us that 
+\[\frac{1}{c_{t}} = \beta V^{\prime}(Ak_{t}^{\alpha} - c_{t})\]
+Plugging in $V(k_{t}) = a + b \log k_{t}$ gives:
+
+\[\frac{1}{c_{t}} = \beta\frac{b}{Ak_{t}^{\alpha} - c_{t}} \implies c_{t}^{*} = \frac{1}{1 + \beta b} Ak_{t}^{\alpha} \implies k_{t+1}^{*} = \frac{\beta b}{1+\beta b}Ak_{t}^{\alpha}\]
+Substituting this into the Bellman equation yields
+\[a + b \log k_{t} = \log \left[ \frac{1}{1 + \beta b} Ak_{t}^{\alpha} \right]  + \beta \left(a + b\log\left[  \frac{\beta b}{1+\beta b}Ak_{t}^{\alpha} \right] \right)\]
+Expanding and grouping terms gives 
+\[a + b\log k_{t} = (1+\beta b)\log A + \beta b \log (\beta b) - (1+ \beta b)\log(1+\beta b) + \beta a + \alpha(1+\beta b)\log k_{t}\]
+Equating coefficients on the $\log k_{t}$ terms gives $b = \frac{\alpha}{1-\alpha \beta}$ (which in turn gives $\beta b = \frac{\alpha\beta}{1-\alpha \beta}$ and $1 + \beta b = \frac{1}{1-\alpha \beta}$).\bigskip
+
+Substituting out and equating the constant terms gives
+\[a = \frac{\log A + \alpha \beta \log (\alpha \beta) + (1-\alpha \beta) \log(1-\alpha\beta)}{(1-\beta)(1-\alpha \beta)} \]
+\medskip
+
+c) Plugging those constants into the first order condition gives $c_{t}^{*} = (1 - \alpha\beta)Ak_{t}^{\alpha})$ and $k_{t+1}^{*} = \alpha\beta Ak_{t}^{\alpha}$. That is, save a proportion $\alpha \beta$ of total output, consume the rest.
+\fi
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\item Consider the growth model with labor:
+
+\begin{gather*}
+\underset{\{c_{t},\ell_{t},  k_{t+1}\}}{\max} \quad \sum_{t=0}^{\infty} \beta^{t}[ \log(c_{t}) + \eta \log(1-\ell_{t})]\\
+\text{s.t.} \quad c_{t} + k_{t+1} = Ak_{t}^{\alpha}\ell^{1-\alpha}
+\end{gather*}
+
+Show that the model has the following steady state:
+
+\begin{align*}
+&\bar{\ell} = \frac{1}{1 + \frac{\eta}{1-\alpha} ( 1 - \frac{\alpha \beta \delta}{1 - \beta(1 - \delta)})}\\
+&\bar{k} = \bar{\ell}\left[ \frac{\alpha\beta A}{1 - \beta(1-\delta)}\right]^{\frac{1}{1-\alpha}}\\
+&\bar{c} = A\bar{k}^{\alpha}\bar{\ell}^{1-\alpha} - \delta \bar{k}
+\end{align*}
+
+\ifsln
+\textit{Solution:}
+The steady state Euler equation, intra-temporal consumption-leisure tradeoff, and resource constraint are:
+
+\begin{gather}
+1 = \beta\left[\alpha A \bar{k}^{\alpha - 1}\bar{\ell}^{1-\alpha} + 1 - \delta  \right]\\
+\frac{\eta \bar{c}}{1 - \bar{\ell}} = (1-\alpha)A\bar{k}^{\alpha}\bar{\ell}^{-\alpha}\\
+\bar{c} = A\bar{k}^{\alpha}\bar{\ell}^{1-\alpha} - \delta \bar{k}
+\end{gather}
+
+
+The Euler equation and resource constraint directly give two of the equations above. The tricky one is finding steady state labor. First, define $\bar{Y} = A\bar{k}^{\alpha}\bar{\ell}^{1-\alpha}$. Substitute consumption out of the labor condition using the resource constraint:
+
+\begin{align*}
+\ &\eta[\bar{Y} - \delta \bar{K}] = (1-\bar{\ell})(1-\alpha) \frac{\bar{Y}}{\bar{\ell}}\\
+\therefore \ & \eta[1 - \delta \frac{\bar{K}}{\bar{Y}}]\bar{\ell} = (1-\bar{\ell})(1-\alpha)\\
+\therefore\ & \bar{\ell} \left(1 + \frac{\eta}{1-\alpha}[1 - \delta \frac{\bar{K}}{\bar{Y}}]\right) = 1\\
+\therefore\ & \bar{\ell} = \frac{1}{1 + \left(\frac{\eta}{1-\alpha}\right) \left[1 - \delta \frac{\bar{K}}{\bar{Y}}\right]}\\
+\end{align*}
+
+Noting that $\frac{\bar{k}}{\bar{Y}} = \frac{1}{A \bar{k}^{\alpha -1}\bar{l}^{1-\alpha}} = \frac{1}{A \left(\bar{\ell} \left[\frac{\alpha\beta A}{1 - \beta(1-\delta)} \right]^{\frac{1}{1-\alpha}}\right)^{\alpha -1}\bar{l}^{1-\alpha}} = \frac{\alpha \beta}{1 - \beta(1-\delta)}$ finishes it.
+\fi
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Consider a tree whose growth is determined by a function $h$. This is, if $k_{t}$ is the size of the tree in period $t$, then $k_{t+1} = h(k_{t})$, $t=0, 1, \dots$. Suppose $h$ is strictly increasing, strictly conncave, and $h(0) > 0$. Assume that the price of wood and the interest rate are constant over time, with $p = 1$ and $\beta = \frac{1}{1+r}$. Assume further that it is costless to cut down the tree. If the tree cannot be replanted, present value maximization leads to the functional equation $V(k_{t}) = \max\{k_{t}, \beta V(h(k_{t+1})\}$.
+
+\begin{enumerate}[a)]
+	\item Show that the above operator satisfies Blackwell's conditions for a contraction mapping.
+	\item Let $k_{0}$ be the height of the tree that solves $\beta h(k_{0}) = k_{0}$. Show that the rule ``cut down the tree if $k \geq k_{0}$, leave it standing otherwise'' is optimal.
+\end{enumerate}
+
+
+\ifsln
+\textit{Solution:}\\
+a) Let $f(x) \leq g(x)$ $\forall x$. Then $\max\{k_{t}, \beta f(h(k_{t}))\} \leq \max\{k_{t}, \beta g(h(k_{t}))\}$ (B1). $T(f(x) + a) = \max\{k_{t}, \beta(f(h(k_{t}) + a)\} = \max\{k_{t}, \beta f(h(k_{t})) + \beta a\} \leq \max\{k_{t}+\beta a, \beta f(h(k_{t})) + \beta a\} = \max\{k_{t}, \beta f(h(k_{t}))\} + \beta a = T(f) + \beta a$ (B2). Therefore the operator is a contraction mapping.\medskip
+
+b)Note that we have $\beta h(k_{t}) > k_{t}$ if $k_{t} < k_{0}$, and $\beta h(k_{t}) < k_{t}$ if $k_{t} > k_{0}$.\medskip
+
+Suppose $k_{t} < k_{0}$. Then
+\begin{align*}
+V(k_{t}) &= \max\{k_{t}, \beta V(h(k_{t}))\}\\
+& > \max\{k_{t}, \beta V(k_{t}/\beta)\}\\
+& = \beta \max\{k_{t}/\beta, V(k_{t}/\beta)\}\\
+& = \beta V(k_{t} / \beta)\\
+& > \beta k_{t} / \beta\\
+&= k_{t}
+\end{align*}
+So if $k_{t} < k_{0}$, then $V(k_{t}) > k_{t}$. So we should leave the tree up. By the same logic in the other direction, we should take the tree down if $k_{t} \geq k_{0}$.
+
+
+\fi
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\item {[Challenge Problem] You don't have to submit this one if you don't want to.}\smallskip
+
+ Check out the setup of an odd game here: \smallskip
+
+\href{https://www.youtube.com/watch?v=6_yU9eJ0NxA&ab_channel=Numberphile}{https://www.youtube.com/watch?v=6\_yU9eJ0NxA\&ab\_channel=Numberphile}.\bigskip
+
+We can define the expected payoff of this game recursively with value functions. Let $V(R_{t})$ be the expected payoff of the game. 
+
+\begin{enumerate}[a)]
+\item Show that
+\[V(R_{t}) = 1 + \P(d_{t} \leq R_{t})\int_{0}^{R_{t}} \P(d_{t}=x \ | \ d_{t} \leq R_{t}) V\left(\sqrt{R_{t}^{2} - x^{2}}  \right) \mathrm{d}x\]
+where $R_{t}$ is the current radius of the board, and $d_{t}$ is the distance the dart lands from the origin.
+\item Find expressions for $\P(d_{t} \leq R_{t})$ and $\P(d_{t}=x \ | \ d_{t} \leq R_{t})$.
+
+\item Verify that the above operator satisfies the Blackwell conditions.
+
+\item Guess $V^0 = 0$ and manually perform 3 value function iterations.
+
+\item Make a guess for the value function and verify it.
+
+\item What's the expected score for the game with dart board of initial radius 1?
+\end{enumerate}
+
+\ifsln
+\textit{Solution:}\\
+a) For a given radius $R_{t}$, we get to throw one dart; so the period payoff is 1. If we fail to hit the board, the game ends and our future payoff is zero. If we do hit the board, which happens with $\P(d_{t} \leq R_{t})$ (probability that the distance the dart lands is within $R_{t}$ of the origin), we continue the game with a board of new radius $R_{t+1} = \sqrt{R_{t}^{2} - d_{t}^{2}}$. Since $d_{t}$ is random, we must take expectation over future values $\E[V(R_{t+1})]$. The expectation is over the condtional density, $\P(d_{t} = x \ | \ d_{t} \leq R_{t})$, since we must condition on the dart hitting the board.\bigskip
+
+b) $\P(d_{t} \leq R_{t})$ is the area of the board divided by the area the dart could land in. The dart could land in a $2\times 2$ square centered at the origin, so $\P(d_{t} \leq R_{t}) = \frac{\pi R_{t}^{2}}{4}$.\\
+
+By similar logic, $\P(d_{t} \leq x \ | \ d_{t} \leq R_{t})$ is the probability that the dart lands in a circle of radius $x$ given than it lands in the board of radius $R_{t}$. So $\P(d_{t} \leq x \ | \ d_{t} \leq R_{t}) = \frac{\pi x^{2}}{\pi R_{t}^{2}} = \frac{x^{2}}{R_{t}^{2}}$. Differentiating gives $\P(d_{t} = x \ | \ d_{t} \leq R_{t}) = \frac{2 x}{ R_{t}^{2}}$.\\
+
+c) Let $f(x) \leq g(x) \  \forall x$. By monotonicity of integrals: $1 + \P(d_{t} \leq R_{t})\int_{0}^{R_{t}} \P(d_{t}=x \ | \ d_{t} \leq R_{t}) f\left(\sqrt{R_{t}^{2} - x^{2}}  \right) \mathrm{d}x \leq 1 + \P(d_{t} \leq R_{t})\int_{0}^{R_{t}} \P(d_{t}=x \ | \ d_{t} \leq R_{t}) g\left(\sqrt{R_{t}^{2} - x^{2}}  \right) \mathrm{d}x$  (B1).\\
+
+$T(f(x) + a) = 1 + \P(d_{t} \leq R_{t})\int_{0}^{R_{t}} \P(d_{t}=x \ | \ d_{t} \leq R_{t}) \left[ f\left(\sqrt{R_{t}^{2} - x^{2}} + a\right] \right) \mathrm{d}x = 1 + \P(d_{t} \leq R_{t})\int_{0}^{R_{t}} \P(d_{t}=x \ | \ d_{t} \leq R_{t}) f\left(\sqrt{R_{t}^{2} - x^{2}}  \right) \mathrm{d}x +  \P(d_{t} \leq R_{t})\int_{0}^{R_{t}} \P(d_{t}=x \ | \ d_{t} \leq R_{t}) a \mathrm{d}x = 1 + \P(d_{t} \leq R_{t})\int_{0}^{R_{t}} \P(d_{t}=x \ | \ d_{t} \leq R_{t}) f\left(\sqrt{R_{t}^{2} - x^{2}}  \right) \mathrm{d}x +  \P(d_{t} \leq R_{t}) a = T(f) + \P(d_{t} \leq R_{t}) a $. Since $\P(d_{t} \leq R_{t}) < 1$, the discounting property is satisfied (B2). \\
+
+d) Plugging in the probabilities we found above, the value function is:
+
+\[V(R_{t}) = 1 + \frac{\pi}{2}\int_{0}^{R_{t}} x V(\sqrt{R_{t}^{2} - x^{2}}) \mathrm{d}x\]
+
+If we begin with $V^{0}(R_{t}) = 0$, then $V^{1}(R_{t}) = 1$.\\
+
+ $V^{2}(R_{t}) = 1 + \frac{\pi}{2}\int_{0}^{R_{t}} x \mathrm{d}x = 1 + \frac{\pi R_{t}^{2}}{4}$\\
+
+$V^{3}(R_{t}) = 1 + \frac{\pi}{2}\int_{0}^{R_{t}} x (1 + \frac{\pi (\sqrt{R_{t}^{2} - x^{2}})^{2}}{4}) \mathrm{d}x = 1 + \frac{\pi}{2}\int_{0}^{R_{t}} x + \frac{x\pi R_{t}^{2}}{4} - \frac{x^{3}}{4} \mathrm{d}x = 1 + \frac{\pi}{2} \left[ \frac{1}{2}x^{2} + \frac{x^{2}\pi R_{t}^{2}}{8} - \frac{x^{4}}{16} \right]^{R_{t}}_{0} = 1 + \frac{\pi R_{t}^{2}}{4} + \frac{\pi^{2} R_{t}^{4}}{32} = 1 + \left(\frac{\pi R_{t}^{2}}{4}\right) + \frac{1}{2}\left(\frac{\pi R_{t}^{2}}{4}\right)^{2}$.\\
+
+e) This is starting to look like the Taylor series for $\exp\{\frac{\pi R_{t}^{2}}{4} \}$. So guess $V(R_{t}) = \exp\{\frac{\pi R_{t}^{2}}{4} \}$.\\
+
+\begin{align*}
+1 + \frac{\pi}{2} \int_{0}^{R_{t}} x \exp\{ \frac{\pi (\sqrt{R_{t}^{2} - x^{2}})^{2}}{4}\} \mathrm{d}x &=  1 + \frac{\pi}{2} \int_{0}^{R_{t}} x \exp\{\frac{\pi R_{t}^{2}}{4}\} \exp\{-\frac{\pi x^{2}}{4} \}\mathrm{d}x \\
+&= 1 + \exp\{\frac{\pi R_{t}^{2}}{4}\}  \int_{0}^{R_{t}} \frac{\pi x}{2}  \exp\{-\frac{\pi x^{2}}{4} \}\mathrm{d}x\\
+&= 1 + \exp\{\frac{\pi R_{t}^{2}}{4}\}  \left[- \exp\{ -\frac{\pi x^{2}}{4} \}  \right]^{R_{t}}_{0}\\
+&= 1 + \exp\{\frac{\pi R_{t}^{2}}{4}\}\left[ - \exp\{ -\frac{\pi R_{t}^{2}}{4}\} + 1 \right]\\
+&= 1 - 1 + \exp\{\frac{\pi R_{t}^{2}}{4}\}\\
+&= \exp\{\frac{\pi R_{t}^{2}}{4}\}
+\end{align*}
+
+So we've confirmed that our guess is a fixed point. Therefore we've found the value function.\\
+
+f) $V(1) = e^{\pi/4} \approx 2.2$.
+
+\fi
+
+\end{enumerate}
+
+\end{document}

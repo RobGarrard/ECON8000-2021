@@ -1,0 +1,375 @@
+\documentclass[11pt, xcolor={dvipsnames}, hyperref={colorlinks, allcolors=Blue}]{beamer}
+
+
+% Packages
+\usepackage{graphicx}
+\usepackage{caption, subcaption}
+\usepackage{tikz}
+\usepackage{amsmath, amsfonts, amssymb}
+\usepackage{bm}
+\usepackage{booktabs}
+\usepackage{apacite}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{doi}
+\usepackage{textpos}
+\usepackage{lipsum}
+\usepackage{amsfonts, amsmath}
+\usepackage{wrapfig}
+\usepackage{animate}
+\usepackage{cleveref}
+
+
+\renewcommand\doiprefix{}
+
+
+\usepackage{tikz}
+\usetikzlibrary{shapes, fit}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Custom commands
+\newcommand\bc[1]{{\usebeamercolor[fg]{frametitle} {\textbf{#1}}}} % bold and color
+\newcommand{\into}{\rightarrow}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Set Theme
+\usetheme{Boadilla}
+\usecolortheme{rose}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Make citation font tiny
+\renewcommand{\bibliographytypesize}{\tiny}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Fonts
+\usefonttheme{serif} % Serif font
+\setbeamertemplate{enumerate items}[default] % Don't use bullets in enumerate.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Remove navigation bar
+\setbeamertemplate{navigation symbols}{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% Frontmatter
+\title[ECON 8000 -  Lecture 9]{Lecture 9: Optimization II}
+\author[University of Queensland]{Robert Garrard}
+\date[\today]{} 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Common commands
+
+% Sets
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\E}{\mathbb{E}}
+
+% Symbols
+\renewcommand{\epsilon}{\varepsilon}
+\renewcommand{\implies}{\Rightarrow}
+\newcommand{\halmos}{\hfill$\blacksquare$}
+
+% Vector notation
+\renewcommand{\a}{\mathbf{a}}
+\renewcommand{\b}{\mathbf{b}}
+\newcommand{\h}{\mathbf{h}}
+\newcommand{\x}{\mathbf{x}}
+\newcommand{\X}{\mathbf{X}}
+\newcommand{\y}{\mathbf{y}}
+\newcommand{\z}{\mathbf{z}}
+\renewcommand{\v}{\mathbf{v}}
+\newcommand{\bepsilon}{\mathbf{\varepsilon}}
+\newcommand{\bbeta}{\mathbf{\beta}}
+
+% Matrices
+\newcommand{\eyetwo}{\begin{pmatrix} 1 & 0\\ 0 & 1 \\ \end{pmatrix}} % I_2 identity matrix
+\newcommand{\eyethree}{\begin{pmatrix} 1 & 0 & 0\\ 0 & 1 & 0\\ 0 & 0 & 1 \end{pmatrix}} % I_3 identity matrix
+\newcommand{\zerotwo}{\begin{pmatrix} 0 & 0\\ 0 & 0 \\ \end{pmatrix}} % 2x2 Zero matrix
+\newcommand{\zerothree}{\begin{pmatrix} 0 & 0 & 0\\ 0 & 0 & 0\\ 0 & 0 & 0 \end{pmatrix}} % 3x3 Zero matrix
+
+
+% Misc
+
+\newcommand{\innerprod}[2]{\langle #1, #2 \rangle}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Tikz
+\usetikzlibrary{arrows,shapes,trees, positioning}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcounter{Lecture}
+\addtocounter{Lecture}{9}
+
+\newcounter{exercise}
+\newenvironment{exercise}[1][]{\refstepcounter{exercise}\par\medskip
+   \noindent {\bc{Exercise}~\bc{\theLecture.\theexercise} #1}}{\medskip}
+
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+
+%\begin{picture}(0,0)
+%\put(35,-50){\hbox{\includegraphics[width=0.8\textwidth, trim={0cm, 1cm, 0cm, 1cm}, clip]{prob_stats}}}
+%\end{picture}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Meaning of the Multiplier}
+
+
+\begin{align*}
+\underset{\{x, y\}}{\mathrm{max}}  \quad& f(x, y)\\
+\text{s.t}\quad \ \ & g(x, y) = a
+\end{align*}
+
+We'll consider $a$ to be a parameter which varies from problem to problem.\bigskip
+
+ For any fixed value of $a$, write $\left(x^{*}(a), y^{*}(a)\right)$ be a solution for the problem, and write $\lambda^{*}(a)$ for the multiplier which corresponds to the solution. \bigskip
+
+$f\left(x^{*}(a), y^{*}(a)\right)$ will be the corresponding optimal value of the objective function. 
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Meaning of the Multiplier}
+\begin{theorem}
+Let $f$ and $g$ be $\mathcal{C}^{1}$ functions of two variables. For any fixed value of the parameter $a$, let $\left(x^{*}(a), y^{*}(a)\right)$ be a solution to the above problem with corresponding multiplier $\lambda^{*}(a)$. Suppose that $x^{*}$, $y^{*}$, and $\lambda^{*}$ are all $\mathcal{C}^{1}$ functions of $a$, and that the NDCQ holds. Then,
+\[\lambda^{*}(a) = \frac{\mathrm{d}}{\mathrm{d}a} f\left(x^{*}(a), y^{*}(a)\right)\]
+\end{theorem}
+
+The multiplier tells us how our maximized utility changes when we change the amount we're constrained by.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Envelope Theorems - Unconstrained}
+\begin{theorem}
+Let $f(\x;a)$ be a $\mathcal{C}^{1}$ funtion of $\x \in \R^{n}$ and a scalar $a$. For each choice of parameter $a$, consider the unconstrained maximisation problem
+\[ \underset{\x}{\mathrm{max}} \quad f(\x;a)\]
+
+Let $\x^{*}$ be a solution of this problem. Suppose that $\x^{*}$ is a $\mathcal{C}^{1}$ function of $a$. Then
+\[\frac{\mathrm{d}}{\mathrm{d}a} f(\x^{*}(a);a) = \frac{\partial }{\partial a}f(\x^{*}(a);a)\]
+\end{theorem}
+
+The proof comes straight from the chain rule
+
+\[\frac{\mathrm{d}}{\mathrm{d}a} f(\x^{*}(a);a) = \sum_{i} \frac{\partial f}{\partial x_{i}}(\x^{*}(a);a) \frac{\mathrm{d}x_{i}}{\mathrm{d} a}(a) + \frac{\partial f}{\partial a}(\x^{*}(a);a)\]
+
+
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Envelope Theorems - Unconstrained}
+\begin{exercise}
+
+
+A firm produces $y$ microchips at a cost $c(y)$, where $c^{\prime}(y) > 0 $, $c^{\prime\prime}(y) < 0$. Of the chips it produces, $1-\alpha$ are defective and cannot be sold. The non-defective chips can be sold at price $p$. How will an increase in the production quality affect the firm's profit?
+\end{exercise}
+\vfill\vfill
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Envelope Theorems - Constrained}
+
+\begin{theorem}
+Let $f,h_{1},\dots,h_{k}:\R^{n}\times\R^{1}\into\R$ be $\mathcal{C}^{1}$ functions. Let $\x^{*}(a) = \left(x_{1}^{*}(a),\dots,x_{n}^{*}(a)\right)$ denote a solution to the problem of maximising $f$ on the constraint set
+\[h_{1}(\x;a) = 0,\dots, h_{k}(\x,;) =0\]
+
+for any fixed choice of the parameter $a$. Suppose that $\x^{*}(a)$ and the Lagrange multipliers $\lambda_{1}(a),\dots,\lambda_{k}(a)$ ar $\mathcal{C}^{1}$ functions of $a$ and that the NDCQ holds. Then
+\[\frac{\mathrm{d}}{\mathrm{d}a}f(\x^{*}(a);a) = \frac{\partial \mathcal{L}}{\partial a}(\x^{a}(a), \lambda(a); a)\]
+where $\mathcal{L}$ is the Lagrangian for the problem.
+\end{theorem}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Envelope Theorems - Constrained}
+\begin{exercise}
+\begin{enumerate}
+	\item Verify the meaning of the multiplier.
+	\item In the infinite horizon consumption-savings problem, what is the effect on optimum lifetime utility of a change in the interest rate $r$?
+\end{enumerate}
+\end{exercise}
+\vfill\vfill
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Inequality Constrained Optimization}
+
+Consider the problem with one inequality constraint 
+
+\begin{align*}
+\underset{\{x_{1}, x_{2}\}}{\mathrm{max}}  \quad& f(x_{1}, x_{2})\\
+\text{s.t}\quad \ \ & g(x_{1}, x_{2}) \leq h
+\end{align*}
+
+As before, it'll be necessary that at a local max/min, $\x^{*}$
+\[\nabla f(\x^{*}) = \mu \nabla g(\x^{*})\]
+
+But we need to impose some further restrictions. We've still got constraints, but they're not as constraining as before. \bigskip
+
+Now we can not only attain an optimum on the boundary, but there's also the possibility of attaining an optimum on the interior of the constraint set. 
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Inequality Constrained Optimization}
+Previously, $\lambda$ was a critical point of the Lagrangian. Taking the partial derivative with respect to $\lambda$ and setting it to zero would result in the budget constraint being retrieved. However, if we were to structure the Lagrangian in the usual way
+\[\mathcal{L} = f(\x) + \mu \left [h - g(\x)\right ]\]
+
+Taking this would yield exactly the same result.
+\[\frac{\partial \mathcal{L}}{\partial \mu} = 0 \implies g(\x) = h\]
+
+This isn't the result we want, because we wish to allow our constraint to be slack. This derivative requires that the constraint bind. So for inequality constraints, we replace this condition with two conditions.\\
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Inequality Constrained Optimization}
+
+\vfill\vfill\bigskip \vfill
+\bc{Non-negativity:} $\mu\geq 0$ \smallskip
+
+\bc{Complementary slackness:} $\mu [h-g(\x)^{*}] = 0$
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Kuhn-Tucker Theorem}
+
+\begin{theorem}[Kuhn-Tucker]
+Suppose that $f,g_{1},\dots,g_{k}$ are $\mathcal{C}^{1}$ functions of $n$ variables. Suppose that $\x^{*}\in \R^{n}$ is a local maximiser of $f$ on the constraint set defined by the $k$ inequalities
+\[g_{1}(\x)\leq b_{1},\dots, g_{k}(\x) \leq b_{k}\]
+
+Assume that at $\x^{*}$, the first $k_0$ constraints are binding at $\x^{*}$ and the last $k-k_{0}$ constraints are slack. Suppose that the following NDCQ is satisfied at $\x^{*}$
+
+The rank of the Jacobian matrix of the \emph{binding} constraints 
+\[
+\begin{pmatrix}
+\frac{\partial g_{1}}{\partial x_{1}}(\x^{*})  &  \dots &  \frac{\partial g_{1}}{\partial x_{n}}(\x^{*})\\
+\vdots & \ddots & \vdots\\
+\frac{\partial g_{k_{0}}}{\partial x_{1}}(\x^{*}) & \dots & \frac{\partial g_{k_{0}}}{\partial x_{n}}(\x^{*})\\
+\end{pmatrix}
+\]
+is $k_{0}$. 
+\end{theorem}
+
+\vfill\vfill
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Kuhn-Tucker Theorem}
+
+\begin{theorem}[Kuhn-Tucker]
+
+
+From the Lagrangian
+\[\mathcal{L} = f(\x) + \mu_{1} [b_{1} - g_{1}(\x)] + \dots + \mu_{1} [b_{1} - g_{1}(\x)] \]
+there exist multipliers, $\mu_{1}^{*},\dots,\mu_{n}^{*}$, such that
+\begin{enumerate}[(a)]
+\item $\frac{\partial \mathcal{L}}{\partial x_{1}}(\x^{*}, \mu^{*}) = 0,\dots,\frac{\partial \mathcal{L}}{\partial x_{1}}(\x^{*}, \mu^{*}) = 0$,
+\item $\mu_{1}^{*}[g_{1}(\x^{*}) - b_{1}] = 0,\dots, \mu_{n}^{*}[g_{n}(\x^{*}) - b_{n}] = 0$
+\item $\mu_{1}^{*} \geq 0,\dots,\mu_{n}^{*} \geq 0$
+\item $g_{1}(\x^{*}) \leq b_{1},\dots, g_{n}(\x^{*}) \leq b_{n}$
+\end{enumerate}
+\end{theorem}
+
+\vfill\vfill
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Exercises}
+\begin{exercise}\textbf{Bliss Point}
+
+
+An agent receives utility from consuming a good,$c$. The agent's utility function is characterised by $U(c) = -c^{2} + 10c +1$. The agent may consume up to their income $y$. \\
+
+Set up and solve the agent's problem. 
+
+\end{exercise}
+\vfill\vfill
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Exercises}
+\begin{exercise} \textbf{Consumption with Free Disposal of Wealth}
+
+An agent lives for two periods. The agent receives utility from consumption, with period utility satisfying $U^{'}(c) > 0$, $U^{''}(c) < 0$. Second period utility is discounted by a factor $\beta \in (0,1)$. At the beginning of time, the agent is endowed with wealth $w$, which they use to finance consumption in every period. The agent is not required to spend all of their income on consumption. The price of the consumption good in period 1 is equal to one unit of wealth. The price of the consumption good in the second period is $p$. The agent chooses consumption in each period to maximise lifetime utility.\\
+
+Solve the agents problem.
+\end{exercise}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Exercises}
+\begin{exercise} \textbf{Inada Conditions}
+
+An agent lives for two periods. The agent receives utility from consumption, with the period utility function, $U(c)$, being strictly increasing, strictly concave and satisfying $\lim_{c\to 0}U^{'}(c) = \infty$, $\lim_{c\to \infty}U^{'}(c) = 0$ (called the Inada conditions). Second period utility is discounted by a factor $\beta \in (0,1)$. At the beginning of time, the agent is endowed with wealth $w$, which they use to finance consumption in every period. The agent is not required to spend all of their income on consumption. The price of the consumption good in each period is equal to one unit of wealth. Consumption in each period must be non-negative. The agent chooses consumption in each period to maximise lifetime utility.\\
+
+Set up and solve the agents problem. 
+\end{exercise}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Adding in Randomness}
+\begin{gather*}
+\max \ \E_{0}\sum_{t=0}^{\infty} \beta^{t} U(c_{t})\\
+\text{s.t.} \ c_{t} + k_{t+1} = A_{t}k_{t}^{\alpha} + (1-\delta)k_{t}\\
+\ln A_{t}  = \rho \ln A_{t-1} + \epsilon_{t}\\
+\epsilon \sim N(0, \sigma^{2})
+\end{gather*}
+\bigskip 
+
+\[\mathcal{L} = \E_{0}\sum_{t=0}^{\infty} \left\{ \beta^{t} U(c_{t}) + \lambda_{t}[A_{t}k_{t}^{\alpha} + (1-\delta)k_{t} - c_{t} - k_{t+1}] \right\}\]
+\vfill\vfill
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Adding in Randomness}
+
+A solution satisfying \bc{rational expectations} uses the mathematical expectation conditioned on all information available to the agent at the time.\bigskip
+
+The usual Lagrange method gives the following characterization of a solution:
+
+\begin{gather*}
+U^{\prime}(c_{t}) = \beta\E_{t}[U^{\prime}(c_{t+1})(A_{t+1}k_{t+1}^{\alpha} + 1-\delta)]\\
+c_{t} + k_{t+1} = A_{t}k_{t}^{\alpha} + (1-\delta)k_{t}
+\end{gather*}
+\bigskip
+
+We'll come back to this model in more detail after Dynamic Programming.
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Learning Outcomes}
+
+\bc{You should be able to:}
+\begin{itemize}
+	\item Apply an envelope theorem.
+	\item Solve an optimization problem using KKT conditions.
+\end{itemize}
+\vfill\vfill
+\end{frame}
+
+\end{document}	

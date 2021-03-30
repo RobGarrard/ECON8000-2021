@@ -1,0 +1,114 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath, amsfonts, amsthm, amssymb}
+\usepackage[left = 1in, right = 1in]{geometry}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage{verbatim}
+\usepackage{booktabs}
+
+% Include Solutions
+\newif\ifsln
+\slnfalse
+%\slntrue
+
+% No Indent
+\setlength\parindent{0pt}
+
+
+% Common Sets
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\renewcommand{\epsilon}{\varepsilon}
+\newcommand{\E}{\mathbb{E}}
+\renewcommand{\P}{\mathbb{P}}
+
+\renewcommand{\iff}{\Leftrightarrow}
+\newcommand{\halmos}{\hfill$\blacksquare$}
+
+\begin{document}
+\pagestyle{fancyplain}
+
+
+\chead{\textbf{Take-home Problem Set \#2 \ifsln Solutions \fi}}
+\lhead{\textbf{ECON8000}}
+\rhead{\textbf{Semester 1, 2021}}
+
+\begin{center}
+Solutions due by 5pm Friday 26\textsuperscript{th} March.
+\end{center}
+
+\begin{enumerate}[1.]
+\setlength\itemsep{5mm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item (2 points) Show that $(1 + x)^{n} \geq 1 + nx$ for $x> -1$ and $n \in \N$.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\item (2 points) Show that an $n \times n$ matrix is invertible if and only if 0 is not an eigenvalue.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\item (3 points) Let $A$ be a square matrix such that $A^{n} = 0$ for some $n \in \N$. Show that all the eigenvalues of $A$ are zero.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item (3 points) There are three cards: one is green on both sides; one is red on both sides; one has a green side and a red side. We draw a card uniformly at random and see that one side is green. What is the probability that the other side is also green?
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\item (3 points) Let $y = X\beta + \epsilon$ be the true data generating process with $\epsilon \sim N(0, \sigma^{2}I)$, $X$ an $n\times k$ matrix of predictors, and $\E[\epsilon \ | \ X] = 0$. Let $\hat{\beta}$ be the OLS estimator of $\beta$. Show that $s^2 \overset{p}{\to} \sigma^{2}$ where
+\[s^{2} = \frac{1}{n-k} \hat{\epsilon}^{\prime}\hat{\epsilon}\]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\item (4 points) Suppose I can generate 3 i.i.d standard normals, $Z = [Z_{1}, Z_{2}, Z_{3}]^{\prime} \sim N(0, I)$. I want to find a linear transformation $A$ that gives me $X = A Z$, $X \sim N(0, \Sigma)$ with 
+\[\Sigma = \begin{pmatrix} 1 & \rho & \rho^{2} \\ \rho & 1 & 0 \\ \rho^{2} & 0 & 1\end{pmatrix}\]
+
+for some arbitrary correlation $\rho \in (0, 1)$.
+
+	\begin{enumerate}[a)]
+		\item (2 point) Show that $\Sigma$ is positive definite.
+		\item (2 points) Find the matrix $A$.
+	\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\item (13 points) An infinitely lived household chooses consumption and labor to maximize
+\[\sum_{t=0}^{\infty} \beta^{t} U(c_{t}, 1-\ell_{t})\]
+where $U$ is strictly increasing, strictly concave, three times continuously differentiable, and satisfies the Inada conditions. A good can be produced with labor, $\ell_{t}$, and capital, $k_{t}$ (which is owned by the household). Output can be consumed by the household, consumed by the government, or used to augment the capital stock. The household earns income by supplying labor to a firm for a given wage, $w_{t}$, or renting out their capital to the firm at a rate $r_{t}$. The government collects taxes using a constant flat rate on each of labor and capital, $\tau_{\ell}$, and $\tau_{k}$. \\
+
+a) (3 points) Set up and solve the household's optimization problem. Show that the household's first order conditions are:
+\begin{gather*}
+U_{\ell}(c_{t}, 1-\ell_{t}) = U_{c}(c_{t}, 1-\ell_{t}) (1-\tau_{\ell})w_{t}\\
+U_{c}(c_{t}, 1-\ell_{t}) = \beta U_{c}(c_{t+1}, 1-\ell_{t+1})\left[(1-\tau_{k})r_{t+1}\right]\\
+c_{t} + k_{t+1} = (1-\tau_{\ell})w_{t}\ell_{t} + (1-\tau_{k})r_{t}k_{t}
+\end{gather*}
+
+Each period, a firm takes as given the wage rate and rental rate. It much choose how much labor to hire and capital to rent to maximize profit given that it has a constant returns to scale production technology $F(k_{t}, \ell_{t})$. Assume the price of the consumption good is normalized to 1. \\
+
+b) (2 points) Show that the profit maximizing conditions for the firm imply that $r_{t} = F_{k}(k_{t}, \ell_{t})$ and $w_{t} = F_{\ell}(k_{t}, \ell_{t})$.\\
+
+The government is subject to a balanced budjet constraint in every period: $g_{t} = \tau_{\ell}w_{t}\ell_{t} + \tau_{k}r_{t}k_{t}$. Recall that Euler's theorem for homogeneous functions gives us that $F(k_{t}, \ell_{t}) = F_{k}(k_{t}, \ell_{t}) k_{t} + F_{\ell}(k_{t}, \ell_{t}) \ell_{t}$.\\
+
+c) (2 points) Show that the government's budget constraint can be written 
+\[g_{t} = F(k_{t}, \ell_{t}) - (1-\tau_{k})r_{t}k_{t} - (1-\tau_{\ell})w_{t}\ell_{t}\]
+
+Suppose that the government wants to optimize the household's lifetime wealth subject to: the government's budge constraint, the aggregate resource constraint, and the household's optimality conditions.
+
+\begin{align*}
+\mathcal{L} = \sum_{t=0}^{\infty}\beta^{t}\left\{ U(c_{t}, 1-\ell_{t}) \right.&+ \Psi_{t}\left[ F(k_{t}, \ell_{t}) - (1-\tau_{k})r_{t}k_{t} - (1-\tau_{\ell})w_{t}\ell_{t} - g_{t} \right]\\
+&+ \theta_{t}\left[ F(k_{t}, \ell_{t}) - c_{t} - g_{t} - k_{t+1} \right]\\
+&+ \lambda_{t}[U_{\ell}(t) - U_{c}(t) (1-\tau_{\ell})w_{t}]\\
+&+ \left. \gamma_{t}[U_{c}(t) - \beta U_{c}(t+1)(1-\tau_{k})r_{t+1}]\right\}
+\end{align*}
+
+d) (3 points) Find the first order condition with respect to $k_{t+1}$. Show that its steady state version is 
+\[\theta = \beta\left[\Psi(r - (1-\tau_{k})r) + \theta r  \right] \]
+
+e) (2 points) Recall that the steady state condition for the household is $1 = \beta (1-\tau_{k}) r$. Show that $(\theta + \Psi) r \tau_{k} = 0$.\\
+
+f) (1 point) Given your answer above, what value of the steady state tax rate maximizes household utility given the constraints?
+
+
+\end{enumerate}
+\end{document}

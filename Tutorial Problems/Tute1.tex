@@ -1,0 +1,323 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath, amsfonts, amsthm, amssymb}
+\usepackage[left = 1in, right = 1in]{geometry}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage{verbatim}
+\usepackage{booktabs}
+
+% Include Solutions
+\newif\ifsln
+\slnfalse
+%\slntrue
+
+% No Indent
+\setlength\parindent{0pt}
+
+
+% Common Sets
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\renewcommand{\epsilon}{\varepsilon}
+
+\renewcommand{\iff}{\Leftrightarrow}
+\newcommand{\halmos}{\hfill$\blacksquare$}
+
+\begin{document}
+\pagestyle{fancyplain}
+
+
+\lhead{\textbf{Tutorial 1 \ifsln Solutions \fi}}
+\chead{\textbf{ECON8000}}
+\rhead{\textbf{Semester 1, 2021}}
+
+\begin{center}
+No solutions due in Week 1.
+\end{center}
+
+\begin{enumerate}[1.]
+
+\item Use truth tables to determine whether the following propositions are tautologies, contradictions, or contingencies.
+
+\begin{multicols}{3}
+	\begin{enumerate}[a)]
+	\item $\neg (p \vee q) \iff \neg p \wedge \neg q$
+	\item $(p \Rightarrow q) \Rightarrow (\neg p \Rightarrow \neg q)$
+	\item  $(p \Leftrightarrow q) \Leftrightarrow (\neg p \Leftrightarrow \neg q)$
+	\end{enumerate}
+\end{multicols}
+ 
+\ifsln
+\textit{Solution}\\
+a) Tautology\\
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+$p$ & $q$ & $\neg(p \vee q)$ & $\neg p \wedge \neg q$ & $\neg (p \vee q) \iff \neg p \wedge \neg q$\\
+\hline
+T & T & F & F & T\\
+T & F & F & F &T\\
+F & T & F & F & T\\
+F & F & T & T & T\\
+\hline
+\end{tabular}
+
+b) Contingency\\
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+$p$ & $q$ & $p \Rightarrow q$ & $\neg p \Rightarrow \neg q$ & $(p \Rightarrow q) \Rightarrow (\neg p \Rightarrow \neg q)$\\
+\hline
+T & T & T & T & T\\
+T & F & F &T &T\\
+F & T & T & F & F\\
+F & F & T & T & T\\
+\hline
+\end{tabular}
+
+c) Tautology\\
+\begin{tabular}{|c|c|c|c|ccc|}
+\hline
+$p$ & $q$ & $p \Leftrightarrow q$ & $\neg p \Leftrightarrow \neg q$ &  $(p \Leftrightarrow q)$ &$\Leftrightarrow $&$(\neg p \Leftrightarrow \neg q)$\\
+\hline
+T & T & T & T && T&\\
+T & F & F & T &&T&\\
+F & T & F & F && T&\\
+F & F & T & T && T&\\
+\hline
+\end{tabular}
+\fi
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\item Prove De Morgan's laws for sets.
+
+\begin{multicols}{3}
+	\begin{enumerate}[a)]
+	\item $\left ( A \cup B \right)^{c} = A^{c}\cap B^{c}$
+	\item $\left ( A \cap B \right)^{c} = A^{c}\cup B^{c}$
+	\end{enumerate}
+\end{multicols}
+
+\ifsln
+\bigskip
+\emph{Solution}\\
+a) $x \in \left ( A \cup B \right)^{c} \iff x \not\in A \cup B \iff x\not\in A\text{ and } x\not\in B \iff x\in A^c \text{ and } x\in B^c \iff x \in A^c \cap B^c$.\\
+b) $x \in (A\cap B)^c \iff x\not\in A\cap C \iff x\not\in A \text{ or } x\not\in B \iff x \in A^c \cup B^c$.
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\item Find the power set for each of the following sets.
+\begin{multicols}{3}
+	\begin{enumerate}[a)]
+	\item $\{ R, G, B\}$
+ 	\item $\{ \emptyset \} $
+	\item $\mathcal{P}(\{\emptyset\}) $
+	\end{enumerate}
+\end{multicols}
+
+\ifsln
+\bigskip
+\emph{Solution}\\
+ a)  $\mathcal{P}(\{R,G,B\}) = \left\{\emptyset, \{R\}, \{G\}, \{B\}, \{R,G\}, \{R,B\}, \{G,B\}, \{R,G,B\} \right.\}$.\\
+ b) $\mathcal{P}(\{\emptyset\}) = \left\{ \emptyset, \{\emptyset\}\right\}$.\\
+ c) $\mathcal{P}\left(\mathcal{P}(\{\emptyset\})\right) = \left\{\emptyset, \{\emptyset\}, \{\{\emptyset\}\}, \{\emptyset, \{\emptyset\}\}  \right\} $. 
+\fi
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Prove by contradiction that the sum of a rational number and an irrational number is irrational.
+
+\ifsln
+\textit{Solution}\\
+Let $a\in \Q$ be a rational number and $b \in \R \backslash \Q$ be an irrational number. Assume $a + b$ is rational. Then $a + b = \frac{p}{q}$ with $p,q \in \Z$ relatively prime. Since $a$ is rational, $a$ can be represented as $\frac{r}{s}$, with $r, s \in \Z$ relatively prime. \\
+
+$b = \frac{p}{q} - \frac{r}{s} = \frac{ps - qr}{qs}$. $ps - qr \in \Z$ and $qs \in \Z$ since integers are closed under addition and multiplication. Therefore $b$ is rational. Contradiction.\\
+
+\halmos
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\item Prove by induction that $1 + x + x^{2} + \dots + x^{n} = \frac{1 - x^{n+1}}{1 - x}$ for $|x|< 1$.
+
+\ifsln
+\textit{Solution}\\
+\underline{Base case: ($n = 0$)}\\
+ Sum of first 0 powers of x is 1. $\frac{1 - x^{0 + 1}}{1 - x} = 1$.\smallskip
+
+\underline{Induction Step:}\\
+$1 + x + \dots + x^{n} + x^{n+1} = \frac{1 - x^{n+1}}{1 - x} + x^{n+1}$ (by induction hypothesis)\\
+$= \frac{1 - x^{n+1}}{1 - x} + \frac{x^{n+1}(1-x)}{1 - x}= \frac{1 - x^{n+1}}{1 - x} + \frac{x^{n+1}-x^{n+2}}{1 - x} = \frac{1 - x^{n+1} + x^{n+1} - x^{n+2} }{1 - x} = \frac{1-x^{(n+1) + 1}}{1-x}$\halmos
+\fi
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\item Prove by induction that $n! \geq n^{2} \quad \forall n\geq 4$.
+
+\ifsln
+\textit{Solution}\\
+\underline{Base case: ($n = 4$)}\\
+$4! = 4\times 3\times 2\times 1 = 24$. $4^{2} = 16$. $24 \geq 16$.\smallskip
+
+\underline{Induction Step:}\\
+$(n+1)! = (n+1)n! \geq (n+1)n^{2}$ (by induction hypothesis)\\
+$= n^{3} + n^{2} \geq n^{2} + 2n + 1$ (since $n^3 \geq 2n + 1 \quad n\geq 4$)\\
+$= (n+1)^{2}$.\\
+
+To verify the claim used in the second step, note that $2 + \frac{1}{n} \leq 3 \leq n^{2}$ if $n = 4$. Since $n^{2}$ is increasing, this remains true for $n\geq 4$. Multiply through by $n$ to get the inequality used.
+
+\halmos
+\fi
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\item Let $R$ be a binary relation from a set $X$ to itself. Prove the following properties of R:
+\begin{enumerate}[a)]
+	\item If $R$ is asymmetric then it is anti-symmetric.
+	\item If $R$ is asymmetric then it is irreflexive.
+	\item If $R$ is irreflexive and transitive then it is asymmetric.
+\end{enumerate}
+
+\ifsln
+\textit{Solution}\\
+a) Recall that anti-symmetry is $xRy \wedge yRx \implies x=y$. Asymmetry is $xRy \implies \neg yRx$. If a relation is asymmetric, then $xRy \wedge yRx$ is always false. Implication following from a false proposition is always true. Therefore asymmetry $\implies$ anti-symmetry.\medskip
+
+b) Assume $R$ is not irreflexive. Then $\exists x$ s.t. $xRx$. By asymmetry, $xRx \implies \neg xRx$. Contradiction. So $R$ must be irreflexive.\medskip
+
+c) Assume $R$ is not asymmetric. Then $\exists x, y \in X$ s.t. $xRy$ and $yRx$. By transitivity, $xRy \wedge yRx \implies xRx$. This contradicts irreflexivity, so $R$ must be asymmetric.
+
+\fi 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\item Let $X = \{a, b, c, d\}$, and $(X, \succsim)$ be a rational weak preference relation. Under these preferences we have $a \succ b \sim c \succ d$. What is the graph of the relation?
+
+\ifsln
+\textit{Solution}\\
+\[G = \{(a, a), (a, b), (a, c), (a, d), (b,b), (b, c), (b, d), (c, b), (c, c),  (c, d), (d,d)\}\]
+
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Find an example of a function $f:\N \to \N$ that is:
+
+\begin{enumerate}[a)]
+	\item  surjective but not injective.
+	\item injective but not surjective.
+	\item neither injective or surjective.
+	\item bijective.
+\end{enumerate}
+
+\ifsln
+\textit{Solution}\\
+a) $f(n) = 1$.\\
+b) $f(n) = n + 1$\\
+c) $f(1) = 1$, $f(n) = 2$; $n\geq 2$\\
+d) $f(n) = n$.
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Let $f:X\to Y$ be a function. Let $U_{1}$ and $U_{2}$ be subsets of $X$, and let $V_{1}$ and $V_{2}$ be subsets of $Y$. Show that
+\begin{multicols}{2}
+	\begin{enumerate}[a)]
+		\item if $U_{1} \subseteq U_{2}$ then $f(U_{1}) \subseteq f(U_{2})$.
+		\item if $V_{1} \subseteq V_{2}$ then $f^{-1}(V_{1}) \subseteq f^{-1}(V_{2})$.
+		\item $\forall U$, $U \subseteq f^{-1}(f(U))$.
+		\item $\forall V$, $f(f^{-1}(V)) \subseteq V$.
+	\end{enumerate}
+\end{multicols}
+
+For c) and d), produce an example where the left hand side is a \emph{strict subset} of the right hand side.\\
+
+\ifsln
+\textit{Solution}\\
+
+a) Recall that $f(U_{1}) = \{ y \in Y \ | \ \exists x\in U_{1} \text{ s.t. } f(x) = y\}$ and $f(U_{2}) = \{ y \in Y \ | \ \exists x\in U_{2} \text{ s.t. } f(x) = y\}$. We're aiming to show that if $y \in f(U_{1})$ then $y\in f(U_{2})$ also.\medskip
+
+Pick a $y \in f(U_{1})$. Then $\exists x \in U_{1}$ such that $f(x) = y$ by definition. Since $U_{1} \subset U_{2}$, $x \in U_{2}$. Since $f(x) = y$, and $x\in U_{2}$,  then $y \in f(U_{2})$ by definition. \\
+
+b) $f^{-1}(V_{1}) = \{x \in X \ | \ f(x) \in V_{1}\}$. Pick an $x \in f^{-1}(V_{1})$. Then $f(x) \in V_{1}$. Since $V_{1} \subset V_{2}$, $f(x) \in V_{2}$. So $x \in f^{-1}(V_{2})$.\\
+
+c) Pick an $x \in U$. Then $f(x) \in f(U)$ by definition. $f^{-1}(f(U)) = \{a \in X \ | \ f(a) \in f(U) )$. $x$ satisfies that requirement, so $x \in f^{-1}(f(U))$. Therefore $U \subset f^{-1}(f(U))$.\smallskip
+
+Consider the mapping $f:\N \to \N$, $f(n) = 1$. Let $U = \{1, 2\}$. We have $f(U) = \{1\}$, $f^{-1}(\{1\}) = \N$, and $U \subset \N$. We get a proper subset because there are other elements in the domain not in our set $U$ that also map to 1.\\
+
+d) Pick a $y \in f(f^{-1}(V))$. Then there must be an $x \in f^{-1}(V)$ such that $f(x) = y$. Since $x \in f^{-1}(V)$, there must be a $z \in V$ such that $f(x) = z$. From the definition of a function, if $f(x) = y$ and $f(x) = z$, then $z = y$ so $y \in V$. Therefore $f(f^{-1}(V)) \subseteq V$. \smallskip
+
+Consider the mapping $f:\N \to \N$, $f(n) = n+1$. Let $V = \{1, 2\}$. Then $f^{-1}(V) = \{1\}, f(\{1\}) = \{2\} \subset V$. We get a proper subset because there's an element in our set $V$, namely 1, that nothing in the domain maps to. 
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Show that a preference relation $(X, X, \succsim)$ can be represented by a utility function \emph{only if} preferences are complete and transitive.
+
+\ifsln
+\textit{Solution}\\
+For any $x, y \in X$, either $U(x) \geq U(y)$ or $U(y) \geq U(X)$. Since $U$ represents the preferences, either $x \succsim y$ or $y \succsim x$. Further, $\forall x\in X$, $U(x) \leq U(x)$, so $x \succsim x$. Therefore the preferences must be complete.\\
+
+For any $x, y, z\in X$, $U(x) \geq U(y) \wedge U(y) \geq U(Z) \implies U(x) \geq U(z)$, since $\geq$ is transitive. Therefore $x\succsim y \wedge y \succsim z \implies x \succsim z$, so preferences are also transitive.
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Let $(X, d_{1})$ and $(X, d_{2})$ be metric spaces. Show that $d_{3}(x, y) = \max\{d_{1}(x, y), d_{2}(x,y)\}$ is a valid metric.
+
+\ifsln
+\textit{Solution}\\
+Assumption 1: if $x=y$, then $d_{1}(x,y) = d_{2}(x, y) = 0$. $d_{3}(x,y) = \max\{0, 0\} = 0$. If $x \not = y$, then $d_{1}$ and $d_{2}$ are both non-zero. The max of two non-zero numbers is non-zero.\medskip
+
+Assumption 2: $d_{3}(x, y) = \max\{ d_{1}(x, y), d_{2}(x, y)\} = \max\{d_{1}(y, x), d_{2}(y, x)\} = d_{3}(y, x)$.\medskip
+
+Assumption 3: Note that\\
+$d_{1}(x, y) \leq d_{1}(x, z) + d_{1}(z, y) \leq \max\{ d_{1}(x, z), d_{2}(x, z)\} + \max\{d_{1}(z, y), d_{2}(z, y)\}$.\\
+$d_{2}(x, y) \leq d_{2}(x, z) + d_{2}(z, y) \leq \max\{ d_{1}(x, z), d_{2}(x, z)\} + \max\{d_{1}(z, y), d_{2}(z, y)\}$.\\
+
+If the inequality holds for \emph{both} $d_{1}$ and $d_{2}$ then it must hold for the \emph{maximum} of the two (since the max will be either one or the other).\\
+$\max\{d_{1}(x, y), d_{2}(x, y)\} \leq \max\{ d_{1}(x, z), d_{2}(x, z)\} + \max\{d_{1}(z, y), d_{2}(z, y)\}$.\\
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\item Prove that the union of any number of open sets is open.
+
+\ifsln
+\textit{Solution}\\
+Consider the union of two open sets $A\cup B$ (this generalises to any number of open sets).
+Pick any point $x\in A\cup B$. $x$ must be in $A$ or $B$ or both.\\
+
+If $x\in A$, then since A is an open set, \\
+\[ \exists \epsilon_{1} > 0 \ s.t \ B(x,\epsilon_{1})  \subset A \subset A \cup B\]
+
+If $x\in B$, then since B is an open set, \\
+\[ \exists \epsilon_{2} > 0 \ s.t \ B(x,\epsilon_{2})  \subset B \subset A \cup B\]
+
+If $x$ is in both, pick either of $\epsilon_{1}, \epsilon_{2}$.
+
+So for any point in $A\cup B$, we can fit an open ball around it completely contained in $A\cup B$. So $A\cup B$ is an open set.
+
+
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Show that the intersection of finitely many open sets is open.
+
+\ifsln
+\textit{Solution}\\
+Consider the intersection of two open sets, $A \cap B$. Pick any $x\in A \cap B$.\\
+
+$x \in A$, which is open, so 
+\[ \exists \epsilon_{1} > 0 \ s.t \ B(x,\epsilon_{1}) \subset A\]
+$x \in B$, which is open, so
+\[ \exists \epsilon_{2} > 0 \ s.t \ B(x,\epsilon_{2}) \subset B\]
+Pick $\min\{\epsilon_{1}, \epsilon_{2}\}$.\\
+\[ B(x, \min\{ \epsilon_{1}, \epsilon_{2}\}) \subset B(x, \epsilon_{1}) \subset A \]
+\[ B(x, \min\{ \epsilon_{1}, \epsilon_{2}\}) \subset B(x, \epsilon_{2}) \subset B \]
+\[ B(x, \min\{ \epsilon_{1}, \epsilon_{2}\}) \subset A \cap B \]
+
+We can't generalise this to the intersection of any number of sets because, in general, $\min\{\epsilon_{1}, \epsilon_{2}, \epsilon_{3},...\}$ may not exist. It does, however, exist for finitely many intersections. So the intersection of finitely many open sets is open.
+\fi
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\end{enumerate}
+\end{document}
